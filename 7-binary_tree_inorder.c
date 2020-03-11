@@ -13,7 +13,7 @@ void binary_tree_inorder(const binary_tree_t *tree, void (*func)(int))
 		return;
 	if (tree->left && (tree->left->left || tree->left->right))
 		binary_tree_inorder(tree->left, func);
-	if (tree->parent && tree->left)
+	if ((tree->parent && tree->left) && !(tree->left->left || tree->left->right))
 		func(tree->left->n);
 	func(tree->n);
 	if (tree->right && (tree->right->left || tree->right->right))
