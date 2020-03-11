@@ -13,11 +13,11 @@ void binary_tree_postorder(const binary_tree_t *tree, void (*func)(int))
 		return;
 	if (tree->left && (tree->left->left || tree->left->right))
 		binary_tree_postorder(tree->left, func);
-	if (tree->parent && tree->left)
+	if (tree->left && !(tree->left->left || tree->left->right))
 		func(tree->left->n);
 	if (tree->right && (tree->right->left || tree->right->right))
 		binary_tree_postorder(tree->right, func);
-	else if (tree->right)
+	else if (tree->right && !(tree->left->left || tree->left->right))
 		func(tree->right->n);
 	func(tree->n);
 }
