@@ -29,6 +29,8 @@ const binary_tree_t *second)
 	binary_tree_t *aux, *_first = (void *)first, *_second = (void *)second;
 	int h_first, h_second, gap = 0;
 
+	if (!first || !second)
+		return (NULL);
 	while (_first->parent)
 		_first = _first->parent;
 	while (_second->parent)
