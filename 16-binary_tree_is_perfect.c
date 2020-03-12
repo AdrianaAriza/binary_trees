@@ -50,13 +50,24 @@ size_t bt_height(const binary_tree_t *tree)
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
 	int f = binary_tree_is_full(tree);
+	binary_tree_t *al, *ar;
 
 	if (!tree)
 		return (0);
 	if (f)
 	{
 		if (bt_height(tree->left) == bt_height(tree->right))
-			return (1);
+		{
+			al = tree->left;
+			ar = tree->right;
+			while (al && ar)
+			{
+				al = al->left;
+				ar = ar->right;
+			}
+			if (!al && !ar)
+				return (1);
+		}
 	}
 	return (0);
 }
