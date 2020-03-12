@@ -33,10 +33,10 @@ const binary_tree_t *second)
 		_first = _first->parent;
 	while (_second->parent)
 		_second = _second->parent;
-	
+
 	if (_first != _second)
 		return (NULL);
-	
+
 	h_first = binary_tree_depth(first);
 	h_second = binary_tree_depth(second);
 
