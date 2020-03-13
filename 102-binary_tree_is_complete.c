@@ -25,7 +25,7 @@ int is_full(const binary_tree_t *tree)
  * level-order traversal
  * @tree: pointer to the root node of the tree to traverse
  *
- * Return:
+ * Return: if tree is complete return 1
  */
 int binary_tree_is_complete(const binary_tree_t *tree)
 {
