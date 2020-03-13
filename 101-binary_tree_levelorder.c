@@ -24,19 +24,19 @@ int _height(const binary_tree_t *tree)
 /**
  * _del - goes through a binary tree using
  * @tree: pointer to the root node of the tree to traverse
- * @hr: height
+ * @hl: height
+ * @v: vector
  * Return: v
  */
-int *_del(binary_tree_t *tree, int hr)
+void _del(binary_tree_t *tree, int hl, int *v)
 {
 	binary_tree_t *aux;
-	int *v = NULL;
 
-	aux = (void *)tree;
-		while (hr)
+	aux = tree;
+		while (hl)
 		{
 			aux = aux->left;
-			hr--; }
+			hl--; }
 		if (aux->left)
 		{
 			v[0] = 1;
@@ -47,7 +47,6 @@ int *_del(binary_tree_t *tree, int hr)
 			v[2] = 1;
 			v[3] = aux->right->n;
 			aux->right = NULL; }
-		return (v);
 }
 /**
  * binary_tree_levelorder - goes through a binary tree using
@@ -60,7 +59,7 @@ int *_del(binary_tree_t *tree, int hr)
 void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 {
 	int hr = 0, hl = 0;
-	int *v = NULL;
+	int v[4] = {0, 0, 0, 0};
 
 	if (!tree || !func)
 		return;
@@ -68,7 +67,7 @@ void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 	hr = _height(tree->right);
 	if (hl > hr)
 	{
-		v = _del((void *)tree, hr);
+		_del((void *)tree, hl, v);
 	}
 	if (tree->parent == NULL)
 		func(tree->n);
@@ -81,12 +80,13 @@ void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
 	else if (tree->left)
 	{
 		func(tree->left->n);
-		binary_tree_levelorder(tree->left, func); }
+		binary_tree_levelorder(tree->left, func);
+	}
 	else if (tree->right)
 	{
 		func(tree->right->n);
 		binary_tree_levelorder(tree->right, func); }
-	if (!tree->parent && v)
+	if (!tree->parent)
 	{
 		if (v[0])
 			func(v[1]);
